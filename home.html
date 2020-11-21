@@ -3,37 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    
+    <script src="https://unpkg.com/vue@next"></script>                                                                                                                                                        
     <title>Learning Vue JS</title>
 </head>
 <body>
-    <div class="app">
-         {{ messageToShow }}
-    </div>
+   
     <div id='ok' v-if='logging > 5' >
-        {{ test }}
+        {{ logging }}
         <p> Sei loggato con successo, complimenti </p>
         <box 
-            v-bind:article = "dataToShow[1]" 
-            v-bind:key = "dataToShow[0].id"
+        v-bind:article="data"
+        v-for='data in dataToShow'
+        
+           
         >
    
         </box>
     </div>   
-    <ul class='listaLink'>
-        <li v-for='link in links' v-if='link.name'>
-            {{ link.name }}
-        </li>
-        <button v-on:click='showName'>
-            {{ buttonText }}
-        </button>
-    </ul>
+
     
     <script src="home.js"></script>
-    
+    <script>app2.mount('#ok')</script>
+     
 </body>
 </html>
 <!--
-    https://vuejs.org/v2/guide/#Composing-with-Components
+    https://v3.vuejs.org/guide/introduction.html#handling-user-input
+    
 -->
