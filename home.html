@@ -20,10 +20,23 @@
    
         </box>
     </div>   
+    <div class="ButtonField">
+    <h1>{{ nameField  }}</h1>
+    <button v-on:click='changeText("dkosdk")'>Schiaccia</button>
+    </div>
 
-    
+    <div class="inputShow">
+        <h1>To Do List</h1>
+        <p v-for='message in messagesToShow'>{{ message.text }}</p>
+        <input type='text'><button v-on:click='createNewP'>ADD ITEM</button>
+    </div>
     <script src="home.js"></script>
-    <script>app2.mount('#ok')</script>
+    <script>
+    app2.mount('#ok')
+    app1.mount('.ButtonField')
+    app3.mount('.inputShow')
+
+    </script>
      
 </body>
 </html>

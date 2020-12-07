@@ -1,7 +1,7 @@
 -   DIRETTIVE   -
 v-if --> if di qualsiasi altro linguaggio
 v-for --> for di qualsiasi altro linguaggio
-v-bind:key:'varibale.id' --> da utilizzare con un for
+v-bind-key:'varibale.id' --> da utilizzare con un for
 v-on:event-name='namefunctiontocall' -> quando fai un determinato evento si attiva la funzione contenuta nei methods del oggetto vue
 Vue.component(
     'box' , {
@@ -22,4 +22,4 @@ const app = Vue.createApp ( {
         method1 : function(){},
     }
 })
-app.mount('#nameElement');
+app.mount('#nameElement'); 
