@@ -47,16 +47,39 @@
 
 <div class="container">
     <div class="row test2 justify-content-center">
-      <div class="col-2 col-md-5-">Texesd</div>
+      <div class="col-sm-2">Texesd</div>
       <div class="col-2">sdaasd</div>
       <div class="col-2">sdasdasd</div>
-      <div class="col-2">sdasfdsakl</div>
+      <div class="col-2 m-sm-5">sdasfdsakl</div>
       <div class="col-12 justify-content-center">
       <button class='btn btn-outline-primary btn-sm'>Invia</button>
     </div>
     </div>
   </div>
 </div>
+<div class="container">
+  <hr>
+  <h1 class='ml-5'>Test Card</h1>
+  <div class="card-group">
+  <div class="card-md bg-primary">
+    <div class="card-header">prova</div>
+    <div class="card-body">
+      <h5 class="card-title">Example1</h5>
+      <p class="card-text">fkjhasjdkha
+        dssdsdsdsakjdkasjldklaswjjdkajsklfjdkjkalssdfjkjfdlkjlasjkldsajklasj</p>
+    </div>
+  </div>
+  <div class="card-md bg-primary">
+    <div class="card-header">prova</div>
+    <div class="card-body">
+      <h5 class="card-title">Example1</h5>
+      <p class="card-text"><small>fkjhasjdkha
+        dssdsdsdsakjdkasjldklaswjjdkajsk</small>lfjdkjkalssdfjkjfdlkjlasjkldsajklasj</p>
+    </div>
+  </div>
+</div>
+</div>
+<p class='text-center'>dssddsasdads</p>
 @yield('content')
 </body>
 </html>
