@@ -4,10 +4,14 @@
 - I'm studing Vue.js ( 3.x )
 
 ## Boostrap
-- Column are max 12 in a row, we can define the width adding the value cole-number ( max 12 )
+- Column are max 12 in a row, we can define the width adding the value col-number ( max 12 )
 - We can decide the breakpoints ( when the style changes ) :
-                                                            1) Small --> sm --> 576px
-                                                            2) Medium --> md --> 768px
-                                                            3) Large --> lg --> 992px
-                                                            4) Extra Large --> xl --> 1200 px
-                                                            5) Extra extra large --> xxl --> 1400px
+                                                            * Small --> sm --> 576px
+                                                            * Medium --> md --> 768px
+                                                            * Large --> lg --> 992px
+                                                            * Extra Large --> xl --> 1200 px
+                                                            * Extra extra large --> xxl --> 1400px
+###### Button
+- Button : btn btn-nameOfColor ex btn btn-primary ( blue ).
+- Button transparent : btn btn-outline-nameOfColor 
+- Button bigger or smaller : btn-xl or btn-sm
