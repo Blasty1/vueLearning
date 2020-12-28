@@ -7,7 +7,7 @@
 - Column are max 12 in a row, we can define the width adding the value cole-number ( max 12 )
 - We can decide the breakpoints ( when the style changes ) :
                                                             1) Small --> sm --> 576px
-                                                            2) Medium --> m --> 768px
+                                                            2) Medium --> md --> 768px
                                                             3) Large --> lg --> 992px
                                                             4) Extra Large --> xl --> 1200 px
                                                             5) Extra extra large --> xxl --> 1400px
