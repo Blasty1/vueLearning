@@ -1,16 +1,56 @@
-.test{
-    background-color: red;
-    color: white;
-}
-.test2{
-    .col-xl-6 , .col-2,.col-6{
-        background-color: black;
-        color: white;
-        border:1px solid white;
-        padding: 1rem;
-        text-align: center;
-        
-        
-    }
+@import "../variables/_color";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap');
+
+
+::placeholder{
+    color: $color10;
     
 }
+html{
+    background-color: $color60 !important;
+    h1 , h2, h3, h4, h5, h6 {
+        font-family: 'Montserrat', sans-serif;
+    }
+    p {
+        font-family: 'Open Sans', sans-serif;
+    }
+
+}
+.title{
+    color: $color30;
+    height: 100%;
+    
+}
+.titleHome{
+    font-size: 5.0rem;
+}
+.login{
+    width: 59vh;
+    height: 40vh;
+}
+.loginInput{
+    border: none;
+    color: $color10;
+}
+.loginButton{
+    border: none;
+    &:hover{
+        background-color: $color30;
+        color: $color10;
+        border: none;
+    }
+    background-color: $color10;
+    color : $color30;
+    font-size: 1.3rem;
+  
+}
+
+.clickMe{
+    background-color: $color30;
+    color: $color10;
+}
+@media only screen and (max-width: 560px) {
+    .login{
+        width: 85vw;
+    }
+  }

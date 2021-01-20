@@ -15,6 +15,10 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                    <button> LOG OUT</button>
+                </form>
                 </div>
             </div>
         </div>

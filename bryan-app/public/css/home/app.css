@@ -1,13 +1,69 @@
-.test {
-  background-color: red;
-  color: white;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap");
+::-webkit-input-placeholder {
+  color: #008ec0;
+}
+:-ms-input-placeholder {
+  color: #008ec0;
+}
+::-ms-input-placeholder {
+  color: #008ec0;
+}
+::placeholder {
+  color: #008ec0;
 }
 
-.test2 .col-xl-6, .test2 .col-2, .test2 .col-6 {
-  background-color: black;
-  color: white;
-  border: 1px solid white;
-  padding: 1rem;
-  text-align: center;
+html {
+  background-color: #DE3C4B !important;
+}
+
+html h1, html h2, html h3, html h4, html h5, html h6 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+html p {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.title {
+  color: #F8F7FF;
+  height: 100%;
+}
+
+.titleHome {
+  font-size: 5.0rem;
+}
+
+.login {
+  width: 59vh;
+  height: 40vh;
+}
+
+.loginInput {
+  border: none;
+  color: #008ec0;
+}
+
+.loginButton {
+  border: none;
+  background-color: #008ec0;
+  color: #F8F7FF;
+  font-size: 1.3rem;
+}
+
+.loginButton:hover {
+  background-color: #F8F7FF;
+  color: #008ec0;
+  border: none;
+}
+
+.clickMe {
+  background-color: #F8F7FF;
+  color: #008ec0;
+}
+
+@media only screen and (max-width: 560px) {
+  .login {
+    width: 85vw;
+  }
 }
 /*# sourceMappingURL=app.css.map */
