@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AACA,AAAA,cAAc,CAAA;EACV,gBAAgB,ECDT,OAAO;EDEd,MAAM,EAAE,GAAG,CAAC,KAAK,CCDV,OAAO;CDEjB;;AAED,AAAA,IAAI,CAAA;EACA,MAAM,EAAE,EAAE;CACb;;AACD,AAAA,KAAK,CAAA;EACD,MAAM,EAAE,GAAG;CACd",
+    "sources": [
+        "chat.scss",
+        "../variables/_color.scss"
+    ],
+    "names": [],
+    "file": "chat.css"
+}

@@ -12,16 +12,20 @@
   color: #008ec0;
 }
 
-html {
-  background-color: #DE3C4B !important;
-}
-
 html h1, html h2, html h3, html h4, html h5, html h6 {
   font-family: 'Montserrat', sans-serif;
 }
 
 html p {
   font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  background-color: #DE3C4B !important;
+}
+
+.form-floating label {
+  color: #008ec0 !important;
 }
 
 .title {
@@ -38,9 +42,13 @@ html p {
   height: 40vh;
 }
 
+.login label {
+  color: black;
+}
+
 .loginInput {
   border: none;
-  color: #008ec0;
+  color: #008ec0 !important;
 }
 
 .loginButton {

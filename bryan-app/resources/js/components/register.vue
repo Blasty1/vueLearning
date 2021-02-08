@@ -1,16 +1,33 @@
 <template>
     <form v-bind:action='route' method='POST'>
-   
+
+
+            <input type='hidden' name='_token' :value="token_csrf">
 
     <div class='container-xxl d-flex flex-column justify-content-around login'>
-        <label v-show='errors.email' for="name" v-for="error in errors.email"class="m-1">{{ error }}</label>
-        <input type="text" name="email" v-model='email' class="flex-grow-1 m-1 ps-3 loginInput" id="" placeholder="Email Da Utilizzare">
+       
+        <div class='form-floating'>
 
-        <label v-show='errors.name' for="name" v-for="error in errors.name"class="m-1">{{ error }}</label>
-        <input type="text"  @blur="checkLenght({'name': 'name' ,'value':email})" name="name" v-model.trim='name' class="flex-grow-1 m-1 ps-3 loginInput" id="" placeholder="Username Da Utilizzare">
-        
-        <label v-show='errors.password' for="name" v-for="error in errors.password"class="m-1">{{ error }}</label>
-        <input type="password" name="password" v-model.trim='password' class = 'flex-grow-1 m-1 ps-3 loginInput' placeholder="Password">
+            <input  type="email" name="email" v-model='email' id='floatingInput' class="flex-grow-1 m-1 ps-3 loginInput form-control" placeholder='email' required>
+            <label  for="floatingInput"  class="m-1" > Email Da utilizzare</label>
+            <div :class="{'invalid-feedback' :  errors.email  }"> sdfsdf</div>
+
+        </div>
+
+         <div class='form-floating'>
+
+             <input  type="text"  @blur="checkLenght({'name': 'name' ,'value':email})" name="name" v-model.trim='name' class="flex-grow-1 m-1 ps-3 loginInput form-control"  placeholder="Username Da Utilizzare" required>
+            <label  for="floatingInput"  class="m-1"> Username </label>
+            
+        </div>
+    
+         <div class='form-floating'>
+
+            
+            <input  type="password" name="password" v-model.trim='password' class = 'flex-grow-1 m-1 ps-3 loginInput form-control' placeholder="Password" required>
+            <label  for="floatingInput"  class="m-1"> Password </label>
+
+        </div>
 
         <button type="submit" class='flex-grow-1 loginButton m-1'>Entra in chat</button>
     </div>
@@ -22,12 +39,12 @@
 export default {
     data : function(){
         return {
-                route : 'routePHP',
+
                 email : '',
                 password : '',
                 name : '' ,
                 errors : {
-                    email : [],
+                    email : ['ok'],
                     password : [],
                     name : []
                  },
@@ -36,7 +53,9 @@ export default {
 
     props : {
 
-        min_lenght : Number
+        min_lenght : Number,
+        route : String,
+        token_csrf : String,
 
     },
 
@@ -52,7 +71,7 @@ export default {
 
                 this.errors[dataToCheck.name].push(error)
             }
-            console.log(typeof this.errors[dataToCheck.name] )
+            
 
         }
 

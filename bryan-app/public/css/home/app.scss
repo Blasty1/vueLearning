@@ -7,7 +7,7 @@
     
 }
 html{
-    background-color: $color60 !important;
+    
     h1 , h2, h3, h4, h5, h6 {
         font-family: 'Montserrat', sans-serif;
     }
@@ -15,6 +15,14 @@ html{
         font-family: 'Open Sans', sans-serif;
     }
 
+}
+body{
+    background-color: $color60 !important;
+}
+.form-floating{
+    label{
+        color: $color10 !important;
+    }
 }
 .title{
     color: $color30;
@@ -27,16 +35,19 @@ html{
 .login{
     width: 59vh;
     height: 40vh;
+    label{
+        color: black;
+    }
 }
 .loginInput{
     border: none;
-    color: $color10;
+    color: $color10 !important;
 }
 .loginButton{
     border: none;
     &:hover{
         background-color: $color30;
-        color: $color10;
+        color: $color10 ;
         border: none;
     }
     background-color: $color10;
