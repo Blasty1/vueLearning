@@ -4891,6 +4891,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var _mixins_csrf_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../mixins/csrf.js */ "./resources/js/mixins/csrf.js");
+/* harmony import */ var _mixins_phpToJs_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../mixins/phpToJs.js */ "./resources/js/mixins/phpToJs.js");
 //
 //
 //
@@ -4906,11 +4908,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  mixins: [_mixins_csrf_js__WEBPACK_IMPORTED_MODULE_0__.csrf, _mixins_phpToJs_js__WEBPACK_IMPORTED_MODULE_1__.phpToJs],
   data: function data() {
     return {};
   },
-  props: {},
+  mounted: function mounted() {
+    this.user = this.getObject(this.user);
+  },
+  props: {
+    route_logout: String,
+    user: String
+  },
   methods: {}
 });
 
@@ -5129,6 +5153,28 @@ __webpack_require__.r(__webpack_exports__);
 var csrf = {
   props: {
     csrf: String
+  }
+};
+
+
+/***/ }),
+
+/***/ "./resources/js/mixins/phpToJs.js":
+/*!****************************************!*\
+  !*** ./resources/js/mixins/phpToJs.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "phpToJs": () => /* binding */ phpToJs
+/* harmony export */ });
+var phpToJs = {
+  methods: {
+    getObject: function getObject(props) {
+      return JSON.parse(props);
+    }
   }
 };
 
@@ -41240,7 +41286,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "container chatContainer flex-grow-1 my-md-3 my-1" },
+    [
+      _c("div", { staticClass: "row h-5" }, [
+        _c("div", { staticClass: "col" }, [
+          _c("h3", { staticClass: "my-3 mx-3" }, [
+            _vm._v(_vm._s(this.user.name))
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col" }, [
+          _c(
+            "form",
+            {
+              staticClass: "d-flex justify-content-end my-auto",
+              attrs: { action: _vm.route_logout, method: "post" }
+            },
+            [
+              _c("input", {
+                attrs: { type: "hidden", name: "_token" },
+                domProps: { value: _vm.csrf }
+              }),
+              _vm._v(" "),
+              _c("button", { staticClass: "my-3", attrs: { id: "logout" } }, [
+                _vm._v(" LOG OUT")
+              ])
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(0)
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -41249,15 +41329,17 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "container chatContainer flex-grow-1 my-md-3 my-1" },
+      { staticClass: "row h-95 align-items-center justify-content-center" },
       [
-        _c("div", { staticClass: "row h-5" }, [
-          _c("div", { staticClass: "col" })
-        ]),
+        _c("div", {
+          staticClass: "col-md-3  h-75 me-md-2 mb-md-5",
+          attrs: { id: "userOnline" }
+        }),
         _vm._v(" "),
-        _c("div", { staticClass: "row h-95" }, [
-          _c("div", { staticClass: "row" })
-        ])
+        _c("div", {
+          staticClass: "col-md-8   h-75 mb-md-5",
+          attrs: { id: "chatWithUser" }
+        })
       ]
     )
   }

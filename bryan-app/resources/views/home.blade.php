@@ -4,11 +4,7 @@
 <link href="{{ asset('css/home/chat.css') }}" rel="stylesheet">
 <div class="container h-100 d-flex">
 
-                {{-- <form action="{{ route('logout') }}" method="post">
-                    @csrf
-            <button> LOG OUT</button>
-        </form> --}}
-        <chat></chat>
+<chat user="{{ json_encode(\Auth::user()) }}" csrf="{{ csrf_token()}}" route_logout="{{ route('logout') }}"></chat>
                 </div>
             </div>
         </div>

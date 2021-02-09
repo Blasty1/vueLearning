@@ -4,9 +4,35 @@
     border: 2px solid $color30;
 }
 
+#logout{
+
+    border: 1px solid $color30;
+    background-color: $color60;
+    color: $color30;
+
+}
+.test1{
+    background-color: red;
+}
+
+.test2{
+    background-color: green;
+}
 .h-5{
     height: 5%;
 }
 .h-95{
     height: 95%;
 }
+#chatWithUser , #userOnline{
+    background-color: $color60;
+    border: 1px solid $color30;
+}
+
+@media only screen and (max-width: 767px) {
+    .h-75{
+
+        height: 45% !important;
+
+    }
+  }
