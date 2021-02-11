@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'password'
+        'name', 'password','email','api_token'
     ];
 
     /**
@@ -27,5 +28,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+
+    public function messages(){
+
+        return $this->hasMany(Message::class,'id_user_received');
+
+    }
 
 }

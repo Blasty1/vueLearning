@@ -35,12 +35,14 @@ export default {
     
     data() {
         return {   
-            
+            'userRegistered' : {},
         }
     },
     mounted() {
-
         this.user = this.getObject(this.user)
+        this.userLoading()
+        console.log(this.userRegistered)
+        
     },
 
     props : {
@@ -49,7 +51,14 @@ export default {
     },
 
     methods: {
-        
+        userLoading : function(){
+            
+            axios
+                .get('api/user/users?api_token=' + this.user.api_token)
+                .then(response => this.userRegistered = response.data)
+                .catch(error => console.log('error'))
+
+        }
     },
 }
 </script>

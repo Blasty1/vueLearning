@@ -66,6 +66,8 @@ class RegisterController extends Controller
         return User::create([
             'name' => strip_tags($data['name']),
             'password' => Hash::make($data['password']),
+            'email' =>  strip_tags($data['email']),
+            'api_token' => \Str::random(60),
         ]);
     }
 }
