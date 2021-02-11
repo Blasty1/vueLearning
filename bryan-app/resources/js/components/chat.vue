@@ -31,7 +31,7 @@ import { csrf } from "./../mixins/csrf.js";
 import { phpToJs } from "./../mixins/phpToJs.js";
 
 export default {
-    mixins : [csrf ,phpToJs],
+    mixins : [csrf ,phpToJs , apiSanctum],
     
     data() {
         return {   
