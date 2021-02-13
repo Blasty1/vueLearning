@@ -1,9 +1,11 @@
-let axiosApi = {
-    
-    headers: {
-                        
-        Authorization: 'Bearer ' + this.user.api_token,
-        Accept: 'application/json'
+let axiosApi = function(token){
+    return { 
+        headers: {
+                            
+            Authorization: 'Bearer ' + token,
+            Accept: 'application/json'
+
+        }
 
     }
 }

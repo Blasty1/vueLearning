@@ -4936,7 +4936,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mixins: [_mixins_csrf_js__WEBPACK_IMPORTED_MODULE_0__.csrf, _mixins_phpToJs_js__WEBPACK_IMPORTED_MODULE_1__.phpToJs, _mixins_axiosApi_js__WEBPACK_IMPORTED_MODULE_2__.axiosApi],
+  mixins: [_mixins_csrf_js__WEBPACK_IMPORTED_MODULE_0__.csrf, _mixins_phpToJs_js__WEBPACK_IMPORTED_MODULE_1__.phpToJs],
   components: {
     mini_chat: _chat_mini_chat__WEBPACK_IMPORTED_MODULE_3__.default
   },
@@ -4961,9 +4961,7 @@ __webpack_require__.r(__webpack_exports__);
     userLoading: function userLoading() {
       var _this = this;
 
-      axios.get('api/user/users', {
-        axiosApi: _mixins_axiosApi_js__WEBPACK_IMPORTED_MODULE_2__.axiosApi
-      }).then(function (response) {
+      axios.get('api/user/users', (0,_mixins_axiosApi_js__WEBPACK_IMPORTED_MODULE_2__.axiosApi)(this.user.api_token)).then(function (response) {
         return _this.userRegistered = response.data;
       })["catch"](function (error) {
         return console.log(error);
@@ -4972,14 +4970,10 @@ __webpack_require__.r(__webpack_exports__);
     loadMessages: function loadMessages(userChosen) {
       var _this2 = this;
 
-      function changePropertyMessages(dataGotted, vueApp) {
-        vueApp.messages.userChannel = dataGotted;
-      }
-
-      axios.get('user/messages/' + this.userChosen.id, {
-        axiosApi: _mixins_axiosApi_js__WEBPACK_IMPORTED_MODULE_2__.axiosApi
-      }).then(function (response) {
-        return _this2.messages.userChannel;
+      axios.get('api/user/messages/' + userChosen.id, (0,_mixins_axiosApi_js__WEBPACK_IMPORTED_MODULE_2__.axiosApi)(this.user.api_token)).then(function (response) {
+        return _this2.channel.messages = response.data;
+      })["catch"](function (error) {
+        return console.log(error);
       });
     }
   }
@@ -5244,12 +5238,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "axiosApi": () => (/* binding */ axiosApi)
 /* harmony export */ });
-var axiosApi = {
-  headers: {
-    Authorization: 'Bearer ' + undefined.user.api_token,
-    Accept: 'application/json'
-  }
+var axiosApi = function axiosApi(token) {
+  return {
+    headers: {
+      Authorization: 'Bearer ' + token,
+      Accept: 'application/json'
+    }
+  };
 };
+
 
 
 /***/ }),

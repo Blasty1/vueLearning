@@ -41,7 +41,7 @@ import { axiosApi } from "./../mixins/axiosApi.js";
 import  mini_chat  from './chat/mini_chat'
 
 export default {
-    mixins : [csrf ,phpToJs, axiosApi ],
+    mixins : [csrf ,phpToJs ],
     components :{
         mini_chat
     },
@@ -69,27 +69,18 @@ export default {
         userLoading : function(){
 
             axios
-                .get('api/user/users',{
-                    axiosApi
-                })
+                .get('api/user/users',axiosApi(this.user.api_token))
                 .then(response => this.userRegistered = response.data)
                 .catch(error => console.log(error))
-                
+
         },
 
         loadMessages : function(userChosen){
-
-            function changePropertyMessages(dataGotted,vueApp){
-
-                vueApp.messages.userChannel = dataGotted
-
-            }
-
+            
             axios
-                .get('user/messages/' + this.userChosen.id,{
-                    axiosApi
-                })
-                .then(response => this.messages.userChannel)
+                .get('api/user/messages/' + userChosen.id,axiosApi(this.user.api_token))
+                .then(response => this.channel.messages = response.data)
+                .catch(error => console.log(error))
 
         },
     },
