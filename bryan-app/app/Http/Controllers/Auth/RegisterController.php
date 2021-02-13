@@ -67,7 +67,7 @@ class RegisterController extends Controller
             'name' => strip_tags($data['name']),
             'password' => Hash::make($data['password']),
             'email' =>  strip_tags($data['email']),
-            'api_token' => \Str::random(60),
+            'api_token' => \Str::random(50),
         ]);
     }
 }

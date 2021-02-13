@@ -15,6 +15,8 @@
             </div>
             <div class='row h-95 align-items-center justify-content-center'>
                         <div id='userOnline' class='col-md-3  h-75 me-md-2 mb-md-5' >
+                            <ul>
+                            </ui
                         </div>
                         <div id='chatWithUser' class='col-md-8   h-75 mb-md-5' >
                         </div>
@@ -29,9 +31,10 @@
 <script>
 import { csrf } from "./../mixins/csrf.js";
 import { phpToJs } from "./../mixins/phpToJs.js";
+import { axiosApi } from "./../mixins/axiosApi.js";
 
 export default {
-    mixins : [csrf ,phpToJs , apiSanctum],
+    mixins : [csrf ,phpToJs, axiosApi ],
     
     data() {
         return {   
@@ -41,7 +44,6 @@ export default {
     mounted() {
         this.user = this.getObject(this.user)
         this.userLoading()
-        console.log(this.userRegistered)
         
     },
 
@@ -52,11 +54,15 @@ export default {
 
     methods: {
         userLoading : function(){
+
+            function changePropertyUserRegistered(dataGotted,vueApp){
+
+                vueApp.userRegistered = dataGotted
             
-            axios
-                .get('api/user/users?api_token=' + this.user.api_token)
-                .then(response => this.userRegistered = response.data)
-                .catch(error => console.log('error'))
+            }
+
+            this.axiosApi(changePropertyUserRegistered)
+            
 
         }
     },

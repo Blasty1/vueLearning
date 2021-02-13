@@ -4893,6 +4893,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _mixins_csrf_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../mixins/csrf.js */ "./resources/js/mixins/csrf.js");
 /* harmony import */ var _mixins_phpToJs_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../mixins/phpToJs.js */ "./resources/js/mixins/phpToJs.js");
+/* harmony import */ var _mixins_axiosApi_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../mixins/axiosApi.js */ "./resources/js/mixins/axiosApi.js");
 //
 //
 //
@@ -4921,10 +4922,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mixins: [_mixins_csrf_js__WEBPACK_IMPORTED_MODULE_0__.csrf, _mixins_phpToJs_js__WEBPACK_IMPORTED_MODULE_1__.phpToJs],
+  mixins: [_mixins_csrf_js__WEBPACK_IMPORTED_MODULE_0__.csrf, _mixins_phpToJs_js__WEBPACK_IMPORTED_MODULE_1__.phpToJs, _mixins_axiosApi_js__WEBPACK_IMPORTED_MODULE_2__.axiosApi],
   data: function data() {
     return {
       'userRegistered': {}
@@ -4933,7 +4937,6 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.user = this.getObject(this.user);
     this.userLoading();
-    console.log(this.userRegistered);
   },
   props: {
     route_logout: String,
@@ -4941,13 +4944,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     userLoading: function userLoading() {
-      var _this = this;
+      function changePropertyUserRegistered(dataGotted, vueApp) {
+        vueApp.userRegistered = dataGotted;
+      }
 
-      axios.get('api/user/users?api_token=' + this.user.api_token).then(function (response) {
-        return _this.userRegistered = response.data;
-      })["catch"](function (error) {
-        return console.log('error');
-      });
+      this.axiosApi(changePropertyUserRegistered);
     }
   }
 });
@@ -5148,14 +5149,48 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
-window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
-  broadcaster: 'pusher',
-  key: '8Dmf5zHuGHbIoX0iiTt1YhqlZ3nqXOPd',
-  wsHost: window.location.hostname,
-  wsPort: 6001,
-  forceTLS: false,
-  disableStats: true
+/* window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: '8Dmf5zHuGHbIoX0iiTt1YhqlZ3nqXOPd',
+    wsHost: window.location.hostname,
+    wsPort: 6001,
+    forceTLS: false,
+    disableStats: true,
 });
+*/
+
+/***/ }),
+
+/***/ "./resources/js/mixins/axiosApi.js":
+/*!*****************************************!*\
+  !*** ./resources/js/mixins/axiosApi.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "axiosApi": () => (/* binding */ axiosApi)
+/* harmony export */ });
+var axiosApi = {
+  methods: {
+    axiosApi: function axiosApi(closure) {
+      var _this = this;
+
+      axios.get('api/user/users', {
+        headers: {
+          Authorization: 'Bearer ' + this.user.api_token,
+          Accept: 'application/json'
+        }
+      }).then(function (response) {
+        return closure(response.data, _this);
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    }
+  }
+};
+
 
 /***/ }),
 
@@ -47420,69 +47455,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container chatContainer flex-grow-1 my-md-3 my-1" },
-    [
-      _c("div", { staticClass: "row h-5" }, [
-        _c("div", { staticClass: "col" }, [
-          _c("h3", { staticClass: "my-3 mx-3" }, [
-            _vm._v(_vm._s(this.user.name))
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col" }, [
-          _c(
-            "form",
-            {
-              staticClass: "d-flex justify-content-end my-auto",
-              attrs: { action: _vm.route_logout, method: "post" }
-            },
-            [
-              _c("input", {
-                attrs: { type: "hidden", name: "_token" },
-                domProps: { value: _vm.csrf }
-              }),
-              _vm._v(" "),
-              _c("button", { staticClass: "my-3", attrs: { id: "logout" } }, [
-                _vm._v(" LOG OUT")
-              ])
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _vm._m(0)
-    ]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "row h-95 align-items-center justify-content-center" },
-      [
-        _c("div", {
-          staticClass: "col-md-3  h-75 me-md-2 mb-md-5",
-          attrs: { id: "userOnline" }
-        }),
-        _vm._v(" "),
-        _c("div", {
-          staticClass: "col-md-8   h-75 mb-md-5",
-          attrs: { id: "chatWithUser" }
-        })
-      ]
-    )
-  }
-]
-render._withStripped = true
+var render = function () {}
+var staticRenderFns = []
 
 
 
