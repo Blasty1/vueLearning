@@ -5,16 +5,18 @@ namespace App\Http\Controllers\Api;
 use App\Events\MessageSent;
 use App\Http\Controllers\Controller;
 use App\Message;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
-    public function index( $idUser )
+    public function index( $idUser , Request $request )
     {
 
         
-        $userLogged = Auth::user();
+        $userLogged = $request->user();
+        dd($userLogged,'ok');
         $userChannel = User::findOrFail($idUser);
 
         return $userLogged->messages()
