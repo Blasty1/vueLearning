@@ -30,6 +30,7 @@
         "@popperjs/core": "^2.6.0",
         "cross-env": "^7.0.3",
         "express": "^4.17.1",
+        "nodejs": "0.0.0",
         "vue": "^2.6.12"
     }
 }

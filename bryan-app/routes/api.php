@@ -21,6 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::middleware('auth:api')->get('/user/users','Api\UserController@index');
 Route::middleware('auth:api')->get('/user/messages/{idUser}',[MessageController::class,'index']);
-Route::middleware('auth:api')->get('/user/message/new',[MessageController::class,'store']);
+Route::middleware('auth:api')->post('/user/message/new',[MessageController::class,'store']);
 
 

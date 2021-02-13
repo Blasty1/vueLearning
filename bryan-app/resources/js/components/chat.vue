@@ -2,7 +2,7 @@
     
         <div class='container chatContainer flex-grow-1 my-md-3 my-1'>
             
-            <div class='row h-5'>
+            <div class='row'>
                 <div class='col'>
                     <h3 class='my-3 mx-3'>{{ this.user.name }}</h3>
                 </div>
@@ -13,12 +13,18 @@
                 </form>
                 </div>
             </div>
-            <div class='row h-95 align-items-center justify-content-center'>
-                        <div id='userOnline' class='col-md-3  h-75 me-md-2 mb-md-5' >
+            <div class='row h-90 align-items-center justify-content-center'>
+                        <div id='userOnline' class='col-md-3  h-90 me-md-2 mb-md-5 p-0' >
                             <ul>
-                            </ui
+                            <li v-for="userChat in userRegistered" @click='loadMessages(userChat)' class="d-flex px-1 align-items-center justify-content-center">
+                                
+                                <h5>{{ userChat.name }}</h5>
+                            
+                            </li>
+                            </ul>
                         </div>
-                        <div id='chatWithUser' class='col-md-8   h-75 mb-md-5' >
+                        <div id='chatWithUser' class='col-md-8 h-90 mb-md-5' >
+                            <mini_chat v-if='channel.messages'> </mini_chat>
                         </div>
                         
                     </div>
@@ -32,13 +38,20 @@
 import { csrf } from "./../mixins/csrf.js";
 import { phpToJs } from "./../mixins/phpToJs.js";
 import { axiosApi } from "./../mixins/axiosApi.js";
+import  mini_chat  from './chat/mini_chat'
 
 export default {
     mixins : [csrf ,phpToJs, axiosApi ],
-    
+    components :{
+        mini_chat
+    },
     data() {
         return {   
             'userRegistered' : {},
+            'channel' : {
+                'userChannel' : '',
+                'messages' : ''
+            },
         }
     },
     mounted() {
@@ -55,16 +68,30 @@ export default {
     methods: {
         userLoading : function(){
 
-            function changePropertyUserRegistered(dataGotted,vueApp){
+            axios
+                .get('api/user/users',{
+                    axiosApi
+                })
+                .then(response => this.userRegistered = response.data)
+                .catch(error => console.log(error))
+                
+        },
 
-                vueApp.userRegistered = dataGotted
-            
+        loadMessages : function(userChosen){
+
+            function changePropertyMessages(dataGotted,vueApp){
+
+                vueApp.messages.userChannel = dataGotted
+
             }
 
-            this.axiosApi(changePropertyUserRegistered)
-            
+            axios
+                .get('user/messages/' + this.userChosen.id,{
+                    axiosApi
+                })
+                .then(response => this.messages.userChannel)
 
-        }
+        },
     },
 }
 </script>
