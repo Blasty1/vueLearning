@@ -62,7 +62,7 @@ class MessageController extends Controller
                 return response('Errore Messaggio non trasmesso '. $e->getMessage());
 
             }
-
-        //broadcast(new MessageSent($message));
+            
+        broadcast(new MessageSent($message));
     }
 }

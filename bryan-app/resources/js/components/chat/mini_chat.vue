@@ -31,6 +31,9 @@ export default {
     mounted(){
 
         this.changePosition()
+
+        Echo.private('chat.' + this.$parent.user.id + '.' + this.messages.userChannel)
+            .listen((e) => console.log(e))
     },
     props : {
 
@@ -65,7 +68,7 @@ export default {
 
             const messagesLi = this.$el.querySelector('#displayMessages').children[0].children;
                 let lastMessage = messagesLi[messagesLi.length - 1]
-                console.log(lastMessage)
+               
                 if (lastMessage) {
                     
                     lastMessage.scrollIntoView({behavior: 'smooth'});
@@ -92,7 +95,7 @@ export default {
                 .then()
                 .catch(error => console.log(error))
 
-
+            this.newMessage=''
         }
 
 

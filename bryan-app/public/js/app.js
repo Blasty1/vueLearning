@@ -5021,6 +5021,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.changePosition();
+    Echo["private"]('chat.' + this.$parent.user.id + '.' + this.messages.userChannel).listen(function (e) {
+      return console.log(e);
+    });
   },
   props: {
     messages: Object
@@ -5038,7 +5041,6 @@ __webpack_require__.r(__webpack_exports__);
     changePosition: function changePosition() {
       var messagesLi = this.$el.querySelector('#displayMessages').children[0].children;
       var lastMessage = messagesLi[messagesLi.length - 1];
-      console.log(lastMessage);
 
       if (lastMessage) {
         lastMessage.scrollIntoView({
@@ -5057,6 +5059,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('api/user/message/new', dataToAppend).then()["catch"](function (error) {
         return console.log(error);
       });
+      this.newMessage = '';
     }
   }
 });
@@ -5265,15 +5268,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
-/* window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: '8Dmf5zHuGHbIoX0iiTt1YhqlZ3nqXOPd',
-    wsHost: window.location.hostname,
-    wsPort: 6001,
-    forceTLS: false,
-    disableStats: true,
+window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
+  broadcaster: 'pusher',
+  key: '8Dmf5zHuGHbIoX0iiTt1YhqlZ3nqXOPd',
+  wsHost: window.location.hostname,
+  wsPort: 6001,
+  forceTLS: false,
+  disableStats: true
 });
-*/
 
 /***/ }),
 

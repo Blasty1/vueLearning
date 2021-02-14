@@ -32,6 +32,6 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('newMessage-' . $this->message->id_user_send . '-' . $this->message->id_user_received);
+        return new PrivateChannel('newMessage.' . $this->message->id_user_send . '.' . $this->message->id_user_received);
     }
 }

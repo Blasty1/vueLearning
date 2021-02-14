@@ -33,7 +33,7 @@ import Echo from "laravel-echo"
 
 window.Pusher = require('pusher-js');
 
-/* window.Echo = new Echo({
+window.Echo = new Echo({
     broadcaster: 'pusher',
     key: '8Dmf5zHuGHbIoX0iiTt1YhqlZ3nqXOPd',
     wsHost: window.location.hostname,
@@ -41,4 +41,3 @@ window.Pusher = require('pusher-js');
     forceTLS: false,
     disableStats: true,
 });
-*/
