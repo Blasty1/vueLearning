@@ -5021,17 +5021,42 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.changePosition();
-    Echo["private"]('chat.' + this.$parent.user.id + '.' + this.messages.userChannel).listen(function (e) {
-      return console.log(e);
-    });
+    this.openChannel();
+    console.log(this.getChannelName());
   },
   props: {
     messages: Object
+  },
+  watch: {
+    'messages.userChannel': function messagesUserChannel(newVal, oldVal) {
+      this.closeChannel();
+      this.openChannel();
+    }
   },
   updated: function updated() {
     this.changePosition();
   },
   methods: {
+    openChannel: function openChannel() {
+      var _this = this;
+
+      Echo.join(this.getChannelName()).listen('.message.stored', function (ev) {
+        _this.newMessages(ev.message);
+      });
+    },
+    closeChannel: function closeChannel() {
+      Echo.leaveChannel(this.getChannelName());
+    },
+    getChannelName: function getChannelName() {
+      var smaller = this.$parent.user.id > this.messages.userChannel.id ? this.messages.userChannel.id : this.$parent.user.id;
+      var bigger = smaller == this.$parent.user.id ? this.messages.userChannel.id : this.$parent.user.id;
+      return 'chat.' + smaller + '.' + bigger;
+    },
+    newMessages: function newMessages(message) {
+      console.log('ok');
+      if (message.id_user_send != this.messages.userChannel.id) return;
+      this.messages.messages.push(message);
+    },
     senderCheck: function senderCheck(message) {
       return message.id_user_send === this.$parent.user.id;
     },
@@ -5056,7 +5081,7 @@ __webpack_require__.r(__webpack_exports__);
         'seen': 'no',
         'message': this.newMessage
       };
-      axios.post('api/user/message/new', dataToAppend).then()["catch"](function (error) {
+      axios.post('api/user/message/new', dataToAppend).then(this.messages.messages.push(dataToAppend))["catch"](function (error) {
         return console.log(error);
       });
       this.newMessage = '';
@@ -5265,6 +5290,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
+// '8Dmf5zHuGHbIoX0iiTt1YhqlZ3nqXOPd key
 
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");

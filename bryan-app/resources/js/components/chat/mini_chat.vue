@@ -26,27 +26,71 @@ export default {
     data(){
         return{
             newMessage : '',
+            
         }
     },
     mounted(){
 
         this.changePosition()
-
-        Echo.private('chat.' + this.$parent.user.id + '.' + this.messages.userChannel)
-            .listen((e) => console.log(e))
+        this.openChannel()
+        console.log(this.getChannelName())
     },
     props : {
 
         messages : Object
 
     },
+
+    watch : {
+
+        'messages.userChannel' : function(newVal,oldVal){
+
+            this.closeChannel()
+            this.openChannel()
+
+
+        }
+
+    },
     updated() {
 
         this.changePosition()
 
+
     },
     methods : {
 
+        openChannel(){
+
+            Echo.join(this.getChannelName())
+            .listen('.message.stored',(ev) => { this.newMessages(ev.message) })
+
+
+        },
+
+        closeChannel(){
+
+            Echo.leaveChannel(this.getChannelName());
+    
+        },
+
+        getChannelName(){
+
+            let smaller = this.$parent.user.id > this.messages.userChannel.id ? this.messages.userChannel.id : this.$parent.user.id
+            let bigger = smaller == this.$parent.user.id ? this.messages.userChannel.id : this.$parent.user.id
+          
+
+            return 'chat.' + smaller + '.' + bigger
+
+        },
+
+        newMessages(message){
+            console.log('ok')
+            if(message.id_user_send != this.messages.userChannel.id) return
+
+            this.messages.messages.push(message)
+
+        },
         senderCheck(message){
 
 
@@ -75,6 +119,7 @@ export default {
                 }
 
         },
+        
 
         submitMessage : function(){
 
@@ -92,7 +137,7 @@ export default {
         
             axios
                 .post('api/user/message/new', dataToAppend )
-                .then()
+                .then(this.messages.messages.push(dataToAppend))
                 .catch(error => console.log(error))
 
             this.newMessage=''

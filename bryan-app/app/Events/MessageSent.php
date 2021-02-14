@@ -15,6 +15,7 @@ class MessageSent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $message;
     /**
      * Create a new event instance.
      *
@@ -23,6 +24,11 @@ class MessageSent implements ShouldBroadcast
     public function __construct(Message $message)
     {
         $this->message = $message;
+
+    }
+    public function broadcastAs()
+    {
+        return 'message.stored';
     }
 
     /**
@@ -32,6 +38,12 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('newMessage.' . $this->message->id_user_send . '.' . $this->message->id_user_received);
+        
+        $idSmaller = ($this->message->id_user_send > $this->message->id_user_received) ? $this->message->id_user_received : $this->message->id_user_send;
+        
+        //found the smaller , i get the opposite
+        $idBigger = ($idSmaller == $this->message->id_user_send) ? $this->message->id_user_received : $this->message->id_user_send;
+       
+        return new PresenceChannel('chat.' . $idSmaller . '.' . $idBigger);
     }
 }

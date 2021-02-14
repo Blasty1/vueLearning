@@ -63,6 +63,6 @@ class MessageController extends Controller
 
             }
             
-        broadcast(new MessageSent($message));
+        broadcast(new MessageSent($message))->toOthers();
     }
 }
