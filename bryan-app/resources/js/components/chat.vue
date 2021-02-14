@@ -4,7 +4,7 @@
             
             <div class='row'>
                 <div class='col'>
-                    <h3 class='my-3 mx-3'>{{ this.user.name }}</h3>
+                    <h3 class='my-3 mx-3'>{{ this.user.name }} To {{ this.channel.userChannel.name}}</h3>
                 </div>
                 <div class='col'>
                 <form v-bind:action="route_logout" method="post" class='d-flex justify-content-end my-auto'>
@@ -23,8 +23,8 @@
                             </li>
                             </ul>
                         </div>
-                        <div id='chatWithUser' class='col-md-8 h-90 mb-md-5' >
-                            <mini_chat v-if='channel.messages'> </mini_chat>
+                        <div id='chatWithUser' class='col-md-8 h-90 mb-md-5 p-0' >
+                            <mini_chat v-if='channel.messages' :messages="channel"> </mini_chat>
                         </div>
                         
                     </div>
@@ -37,7 +37,6 @@
 <script>
 import { csrf } from "./../mixins/csrf.js";
 import { phpToJs } from "./../mixins/phpToJs.js";
-import { axiosApi } from "./../mixins/axiosApi.js";
 import  mini_chat  from './chat/mini_chat'
 
 export default {
@@ -69,7 +68,7 @@ export default {
         userLoading : function(){
 
             axios
-                .get('api/user/users',axiosApi(this.user.api_token))
+                .get('api/user/users')
                 .then(response => this.userRegistered = response.data)
                 .catch(error => console.log(error))
 
@@ -78,8 +77,8 @@ export default {
         loadMessages : function(userChosen){
             
             axios
-                .get('api/user/messages/' + userChosen.id,axiosApi(this.user.api_token))
-                .then(response => this.channel.messages = response.data)
+                .get('api/user/messages/' + userChosen.id)
+                .then(response => { this.channel.messages = response.data; this.channel.userChannel = userChosen })
                 .catch(error => console.log(error))
 
         },

@@ -1,10 +1,14 @@
-let axiosApi = function(token){
+let axiosApi = function(token,dataToAppend=null,csrfToken=null){
     return { 
         headers: {
                             
             Authorization: 'Bearer ' + token,
-            Accept: 'application/json'
+            Accept: 'application/json',
+            'X-CSRF-TOKEN' : csrfToken 
 
+        },
+        data : {
+            dataToAppend
         }
 
     }

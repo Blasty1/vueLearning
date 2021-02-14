@@ -73,6 +73,35 @@
   margin-bottom: 1.3rem;
 }
 
+#displayMessages {
+  overflow-x: auto;
+}
+
+#displayMessages ul {
+  color: #F8F7FF;
+  list-style: none;
+}
+
+#displayMessages ul p::first-letter {
+  text-transform: uppercase;
+}
+
+#displayMessages ul p {
+  overflow-wrap: break-word;
+}
+
+#displayMessages .sender {
+  background-color: #008ec0;
+}
+
+#displayMessages .senderMessage {
+  margin-left: 4rem;
+}
+
+#displayMessages .receiverMessage {
+  margin-right: 4rem;
+}
+
 @media only screen and (max-width: 767px) {
   .h-75 {
     height: 45% !important;

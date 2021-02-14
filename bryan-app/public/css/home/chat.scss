@@ -66,6 +66,30 @@
         margin-bottom: 1.3rem;
     }
 }
+
+#displayMessages{
+    overflow-x: auto;
+    ul{
+        color: $color30;
+        list-style: none;
+        p::first-letter{
+            text-transform: uppercase;
+        }
+        p{
+            overflow-wrap: break-word;
+        }
+       
+    }
+    .sender{
+        background-color: $color10;
+    }
+    .senderMessage{
+        margin-left : 4rem;
+    }
+    .receiverMessage{
+        margin-right: 4rem;
+    }
+}
 @media only screen and (max-width: 767px) {
     .h-75{
 

@@ -8,7 +8,7 @@ class Message extends Model
 {
     protected $fillable = [
 
-        'id_user_send' , 'id_user_received' , 'seen'
+        'id_user_send' , 'id_user_received' , 'seen','message'
 
     ];
 
